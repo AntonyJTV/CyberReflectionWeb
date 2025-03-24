@@ -1,23 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Quicksand", sans-serif;
 }
 
-body {
+html, body {
     background: radial-gradient(circle, #111 0%, #222 50%, #000 100%);
     color: white;
     text-align: center;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100vw;
+    overflow: hidden;
 }
 
-/* Contenitore principale con effetto specchio */
+/* Contenitore globale con scroll snapping */
+.container {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;  /* Attiva il comportamento di snap */
+    scroll-behavior: smooth;  /* Scroll fluido */
+}
+
+/* Sezioni che scorrono */
+.section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;  /* Ogni sezione si ferma esattamente qui */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Effetto di comparsa quando la sezione diventa visibile */
+.section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mantiene la presentazione iniziale centrata */
 .mirror-glass {
     width: 80%;
     max-width: 600px;
@@ -26,8 +53,6 @@ body {
     backdrop-filter: blur(10px);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
     border: 20px solid rgba(111, 91, 49, 1);
-    justify-content: center;
-    align-items: center;
 }
 
 /* Titolo con effetto riflesso */
@@ -43,48 +68,31 @@ p {
     opacity: 0.8;
 }
 
-/* Sezione caratteristiche */
-.features {
-    margin-top: 20px
-}
-
-.features ul {
-    list-style: none;
-    padding: 0;
-}
-
-.features li {
-    font-size: 1.2em;
-    padding: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
 /* Footer */
 footer {
-    margin-top: 20px;
-    font-size: 0.9em;
-    opacity: 0.7;
+    background: black;
+    color: white;
+    height: 100vh;
 }
 
+/* Carousel */
 .carousel {
-      position: relative;
-      width: 100%;
-      height: 55px;
-      overflow: hidden;
-      text-align: center;
-      background: none;
-      
-    }
+    position: relative;
+    width: 100%;
+    height: 55px;
+    overflow: hidden;
+    text-align: center;
+}
 
-    .carousel-inner {
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.5s ease-in-out;
-    }
+.carousel-inner {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out;
+}
 
-    .carousel-item {
-      flex: 0 0 100%;
-      font-size: 1.5em;
-      text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
-      padding: 13.2px;
-    }
+.carousel-item {
+    flex: 0 0 100%;
+    font-size: 1.5em;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+    padding: 13.2px;
+}
