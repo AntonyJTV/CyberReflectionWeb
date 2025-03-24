@@ -18,15 +18,16 @@ body {
 }
 
 /* Contenitore principale con effetto specchio */
-.mirror-container {
+.mirror-glass {
     width: 80%;
     max-width: 600px;
     padding: 30px;
-    border-radius: 20px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 20px solid rgba(111, 91, 49, 1);
+    justify-content: center;
+    align-items: center;
 }
 
 /* Titolo con effetto riflesso */
@@ -44,7 +45,7 @@ p {
 
 /* Sezione caratteristiche */
 .features {
-    margin-top: 20px;
+    margin-top: 20px
 }
 
 .features ul {
@@ -64,3 +65,26 @@ footer {
     font-size: 0.9em;
     opacity: 0.7;
 }
+
+.carousel {
+      position: relative;
+      width: 100%;
+      height: 55px;
+      overflow: hidden;
+      text-align: center;
+      background: none;
+      
+    }
+
+    .carousel-inner {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      flex: 0 0 100%;
+      font-size: 1.5em;
+      text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+      padding: 13.2px;
+    }
