@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+}
+
+html, body {
+    background: radial-gradient(circle, #111 0%, #222 50%, #000 100%);
+    color: white;
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* Contenitore globale con scroll snapping */
+.container {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;  /* Attiva il comportamento di snap */
+    scroll-behavior: smooth;  /* Scroll fluido */
+}
+
+/* Sezioni che scorrono */
+.section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Effetto di comparsa quando la sezione diventa visibile */
+.section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mantiene la presentazione iniziale centrata */
+.mirror-glass {
+    width: 80%;
+    max-width: 600px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    border: 20px solid rgba(111, 91, 49, 1);
+}
+
+/* Titolo con effetto riflesso */
+h1 {
+    font-size: 2.5em;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+}
+
+/* Testo secondario con effetto luminoso */
+p {
+    font-size: 1.2em;
+    opacity: 0.8;
+}
+
+/* Link */
+a {
+    color: #ffcc00;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ffffff;
+}
