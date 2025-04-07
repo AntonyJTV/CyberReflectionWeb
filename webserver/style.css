@@ -24,6 +24,7 @@ html, body {
     overflow-y: auto;
     scroll-behavior: smooth;
     padding: 2rem;
+    position: relative; /* Imposta il container come riferimento per posizionamento assoluto */
 }
 
 /* Sezioni */
@@ -39,6 +40,7 @@ html, body {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
     border: 2px solid rgba(111, 91, 49, 1);
     border-radius: 10px;
+    position: relative; /* Rendi la sezione il contesto per posizionare la freccia */
 }
 
 /* Titoli */
@@ -89,6 +91,50 @@ a {
 
 a:hover {
     color: #ffffff;
+}
+
+/* Stile per la freccia in alto a sinistra */
+.back-to-top {
+    position: absolute;
+    top: 10px; /* Regola la distanza dal bordo superiore interno */
+    left: 10px; /* Regola la distanza dal bordo sinistro interno */
+    font-size: 1.5rem;
+    color: #ffcc00;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.back-to-top a {
+    text-decoration: none;
+    color: #ffcc00;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.back-to-top a:hover {
+    color: #ffffff;
+}
+
+/* Tooltip per la scritta "Torna indietro" */
+.back-to-top .tooltip {
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.back-to-top a:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Media query per schermi piccoli */
