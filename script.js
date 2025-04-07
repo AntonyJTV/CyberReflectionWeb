@@ -36,4 +36,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Auto-slide ogni 3 secondi
   setInterval(nextSlide, 3000);
+
+  // Scroll verso la prossima sezione
+  const scrollDownButtons = document.querySelectorAll('.scroll-down');
+
+  scrollDownButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+          const sections = document.querySelectorAll('.section');
+          if (index + 1 < sections.length) {
+              sections[index + 1].scrollIntoView({ behavior: 'smooth' });
+          }
+      });
+  });
 });
