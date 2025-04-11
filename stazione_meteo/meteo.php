@@ -10,13 +10,14 @@
             margin: 20px;
         }
         table {
-            width: 100%;
+            width: 50%;
             border-collapse: collapse;
             margin-top: 20px;
+            font-size: 0.9em;
         }
         th, td {
             border: 1px solid #ccc;
-            padding: 8px;
+            padding: 4px 6px;
             text-align: left;
         }
         th {
@@ -25,57 +26,105 @@
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+        .container {
+        display: flex;
+        justify-content: center; /* Centra orizzontalmente gli elementi figli */
+        /* Altre proprietà di stile per il contenitore se necessario */
+    }
+
+    canvas {
+        max-width: 80%;
+        margin-top: 40px;
+        /* Non è necessario margin-left e margin-right auto qui */
+    }
     </style>
 </head>
 <body>
-    <h1>Dati Meteo Ultime 10 Giorni</h1>
+    <h1>Dati Meteo Ultimi 10 Giorni</h1>
 
-<?php
+    <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "meteo";
 
-    // Configurazione connessione al database (modificare con le proprie credenziali)
-    $servername = "localhost"; // Solitamente localhost
-    $username = "admin"; // Inserisci il tuo username del database
-    $password = "piwo6t6j"; // Inserisci la tua password del database
-    $dbname = "schema.sql"; // Inserisci il nome del tuo database
-
-    // Crea la connessione
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Verifica la connessione
     if ($conn->connect_error) {
-        die("Connessione al database fallita: " + $conn->connect_error);
+        die("Connessione al database fallita: " . $conn->connect_error);
     }
 
-    // Imposta il fuso orario per la visualizzazione (Italia)
-    mysqli_query($conn, "SET time_zone = '+02:00'"); // CEST
+    mysqli_query($conn, "SET time_zone = '+02:00'");
 
-    // Query per selezionare i dati degli ultimi 10 giorni
     $sql = "SELECT timestamp_utc, temperatura_celsius, umidita_percentuale
             FROM dati_meteo
             WHERE timestamp_utc >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL 10 DAY)
-            ORDER BY timestamp_utc DESC";
+            ORDER BY timestamp_utc ASC";
     $result = $conn->query($sql);
+
+    $labels = [];
+    $temperature = [];
+    $humidity = [];
 
     if ($result->num_rows > 0) {
         echo "<table>";
         echo "<thead><tr><th>Timestamp (Ora Locale)</th><th>Temperatura (°C)</th><th>Umidità (%)</th></tr></thead>";
         echo "<tbody>";
         while ($row = $result->fetch_assoc()) {
-            // Conversione del timestamp UTC all'ora locale (CEST)
             $timestamp_locale = new DateTime($row["timestamp_utc"], new DateTimeZone('UTC'));
-            $timestamp_locale->setTimezone(new DateTimeZone('Europe/Rome')); // Fuso orario italiano
-            echo "<tr><td>" . $timestamp_locale->format('Y-m-d H:i:s') . "</td><td>" . $row["temperatura_celsius"] . "</td><td>" . $row["umidita_percentuale"] . "</td></tr>";
+            $timestamp_locale->setTimezone(new DateTimeZone('Europe/Rome'));
+            $ts = $timestamp_locale->format('Y-m-d H:i');
+            echo "<tr><td>$ts</td><td>{$row['temperatura_celsius']}</td><td>{$row['umidita_percentuale']}</td></tr>";
+
+            $labels[] = $ts;
+            $temperature[] = $row['temperatura_celsius'];
+            $humidity[] = $row['umidita_percentuale'];
         }
-        echo "</tbody>";
-        echo "</table>";
+        echo "</tbody></table>";
     } else {
         echo "<p>Nessun dato meteo trovato per gli ultimi 10 giorni.</p>";
     }
 
-    // Chiudi la connessione
     $conn->close();
-
     ?>
+    <div class="container">
+    <!-- Canvas per il grafico -->
+    <canvas id="meteoChart"></canvas>
 
+    <!-- Chart.js da CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('meteoChart').getContext('2d');
+        const meteoChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: <?php echo json_encode($labels); ?>,
+                datasets: [
+                    {
+                        label: 'Temperatura (°C)',
+                        data: <?php echo json_encode($temperature); ?>,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Umidità (%)',
+                        data: <?php echo json_encode($humidity); ?>,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { ticks: { maxTicksLimit: 10 } },
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</div>
 </body>
 </html>
