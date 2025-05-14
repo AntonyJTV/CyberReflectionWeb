@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Reflection Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #111;
+            color: #f0f0f0;
+            line-height: 1.7;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1e1e1e;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 1rem;
+            display: none;
+        }
+        .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #00bcd4;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        section {
+            margin-bottom: 3rem;
+        }
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 0.5rem;
+        }
+        section p {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        section ul {
+            list-style: disc;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        section li {
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .diagramma {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 2rem auto;
+            border: 1px solid #444;
+            border-radius: 8px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Cyber Reflection</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Introduction</a></li>
+                <li><a href="architettura.html">Architecture</a></li>
+                <li><a href="rpi_server.html">RPi Server</a></li>
+                <li><a href="rpi_client.html">RPi Client</a></li>
+                <li><a href="arduino.html">Arduino</a></li>
+                <li><a href="integrazione.html">Integrations</a></li>
+                 <li><a href="server.html">Home Assistant Server</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>System Architecture</h2>
+            <p>
+                The Cyber Reflection is designed as a distributed system that integrates various hardware and software components to provide an interactive and personalized user experience. The system architecture is composed of the following main elements:
+            </p>
+            <ul>
+                <li><b>Arduino H7:</b> Microcontroller that collects environmental data (temperature and humidity) using the DHT11 sensor.</li>
+                <li><b>Raspberry Pi Client:</b> Device that acts as the main interface of the mirror. It manages voice interaction with the user, displays information on the screen, and communicates with the other system components.</li>
+                <li><b>Raspberry Pi Server:</b> Receives data from the Raspberry Pi Client and forwards it to the main server.</li>
+                <li><b>Main Server:</b> A PC that runs Home Assistant for managing automation logic and service integration.</li>
+            </ul>
+
+            <p>
+                To connect these components securely and efficiently, the system uses a combination of wired and wireless connections, and a virtual private network (VPN) created with Tailscale.
+            </p>
+
+            <h3>VPN with Tailscale</h3>
+            <p>
+                Tailscale is a mesh VPN that simplifies the connection between devices located behind NAT or firewalls. In our system, Tailscale is used to create a private network between the Raspberry Pi Server and the PC Server. This approach offers several advantages:
+            </p>
+            <ul>
+                <li><b>Security:</b> Traffic between devices is encrypted, ensuring data confidentiality.</li>
+                <li><b>Simplicity:</b> Tailscale automatically configures connections, eliminating the need for complex port forwarding configurations.</li>
+                <li><b>Remote access:</b> Allows access to devices from anywhere, as if they were on the same local network.</li>
+            </ul>
+            <p>
+                <b>Limitations of Arduino and solution:</b>
+                Due to compatibility limitations, Arduino cannot directly participate in the Tailscale network. To overcome this, Arduino and the Raspberry Pi Client are connected to the same local network (LAN). The Raspberry Pi Client acts as a bridge, receiving data from Arduino via the LAN and forwarding it to the Raspberry Pi Server via the Tailscale VPN.
+            </p>
+
+            <h3>Communication Flow</h3>
+            <p>
+                The following diagram illustrates the communication flow between the various components of the system:
+            </p>
+            <img src="img/architettura.png" alt="Cyber Reflection Architecture Diagram" class="diagramma">
+            <ol>
+                <li><b>Data collection:</b> Arduino H7 collects data from environmental sensors (temperature, humidity, etc.) and sends it to the Raspberry Pi Client via the local network.</li>
+                <li><b>Voice interaction:</b> The user interacts with the Raspberry Pi Client via voice commands. The Raspberry Pi Client processes these commands and can also provide voice responses.</li>
+                <li><b>Data transmission:</b>
+                    <ul>
+                         <li>The Raspberry Pi Client (Mirror) sends the data received from the Arduino to the Raspberry Pi Server via the local network.</li>
+                         <li>When the activation keyword (wake word) is detected, the Raspberry Pi Client also sends the user data (voice commands, etc.) to the PC Server via the Tailscale VPN.</li>
+                    </ul>
+                </li>
+                <li><b>Data processing and responses:</b> The PC Server (with Home Assistant) processes the received data, executes the automation logic, and sends responses to the Raspberry Pi Client via the Tailscale VPN.</li>
+                <li><b>Information display:</b> The Raspberry Pi Client (Mirror) displays relevant information (environmental data, voice command responses, etc.) on the mirror screen.</li>
+            </ol>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Cyber Reflection Project | Documentation</p>
+    </footer>
+</body>
+</html>

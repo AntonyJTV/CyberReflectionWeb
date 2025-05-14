@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino H7 Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #111;
+            color: #f0f0f0;
+            line-height: 1.7;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1e1e1e;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 1rem;
+            display: none;
+        }
+        .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #00bcd4;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        section {
+            margin-bottom: 3rem;
+        }
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 0.5rem;
+        }
+        section p {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        .codice-arduino, .codice-php {
+            background-color: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: monospace;
+            color: #eee;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .codice-arduino h3, .codice-php h3 {
+            font-size: 1.2rem;
+            color: #00bcd4;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .link-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #00bcd4;
+            color: #f0f0f0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-right: 1rem;
+        }
+        .link-button:hover {
+            background-color: #00869e;
+        }
+        .disclaimer {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 1rem;
+            border-top: 1px solid #444;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Cyber Reflection</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Introduction</a></li>
+                <li><a href="architettura.html">Architecture</a></li>
+                <li><a href="rpi_server.html">RPi Server</a></li>
+                <li><a href="rpi_client.html">RPi Client</a></li>
+                <li><a href="arduino.html">Arduino</a></li>
+                <li><a href="integrazione.html">Integrations</a></li>
+                <li><a href="server.html">Home Assistant Server</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Integration with OpenMeteo and Tailscale</h2>
+            <p>
+                This section describes how the Cyber Reflection project integrates with OpenMeteo to provide weather data.
+            </p>
+        </section>
+        <section>
+            <h2>Tailscale Configuration for a Secure VPN</h2>
+            <p>
+                Tailscale was chosen as the VPN solution for the Cyber Reflection project for several key reasons:
+            </p>
+            <ul>
+                <li><strong>Ease of Implementation:</strong> Tailscale greatly simplifies the creation of a virtual private network (VPN). Unlike traditional VPNs that may require complex and expensive configurations, Tailscale allows devices to connect quickly and easily, even through firewalls and NAT.</li>
+                <li><strong>Security and Privacy:</strong> Tailscale uses the WireGuard protocol, known for its high security and performance. This ensures that communication between devices in the Cyber Reflection network is encrypted and protected from interception. Additionally, Tailscale by default does not store user traffic content.</li>
+                <li><strong>Remote Connectivity:</strong> Tailscale allows team members to access Cyber Reflection and its services from anywhere, as if they were on the same local network. This facilitates remote collaboration and system maintenance.</li>
+                <li><strong>Low Costs:</strong> Tailscale offers a free plan that is sufficient for most personal and small team uses.</li>
+            </ul>
+            <p>
+                Tailscale creates a mesh network between your devices. Each device runs a client software that connects it to the Tailscale network. Once connected, devices can communicate directly with each other as if they were on the same local network.
+            </p>
+            <h3>Tailscale Configuration</h3>
+            <p>
+                Setting up Tailscale is a simple process:
+            </p>
+            <ol>
+                <li><strong>Installation:</strong> Install the Tailscale client on each device you want to include in your network (Raspberry Pi, computer, smartphone, etc.). Tailscale is available for multiple platforms, including Linux, macOS, Windows, iOS, and Android.</li>
+                <li><strong>Authentication:</strong> Log in to your Tailscale account on each device. You can use an existing identity provider like Google, Microsoft, or GitHub.</li>
+                <li><strong>Connection:</strong> Once authenticated, your devices will be connected to your Tailscale network and can communicate with each other.</li>
+            </ol>
+            <p>
+                For more information about Tailscale, its architecture, features, and pricing plans, visit the official site:
+            </p>
+            <ul>
+                <li><strong>Official Tailscale site:</strong> <a href="https://tailscale.com/">https://tailscale.com/</a></li>
+            </ul>
+        </section>
+        <section>
+            <h2>OpenMeteo</h2>
+            <p>
+                The integration with the OpenMeteo API is crucial to provide accurate and real-time weather data. The choice is motivated by:
+            </p>
+            <ul>
+                <li><strong>Free Access:</strong> Wide range of free weather data.</li>
+                <li><strong>API Call Limit:</strong> 1000 calls per day, sufficient for the project's needs.</li>
+                <li><strong>Data Richness:</strong> Temperature, humidity, wind, pressure, sky conditions.</li>
+                <li><strong>Ease of Use:</strong> Clear and concise documentation.</li>
+            </ul>
+            <p>
+                OpenMeteo provides reliable and up-to-date data, enhancing the user experience of Cyber Reflection.
+            </p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Cyber Reflection Project | Documentation</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentazione Arduino H7</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #111;
+            color: #f0f0f0;
+            line-height: 1.7;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1e1e1e;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 1rem;
+            display: none;
+        }
+        .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #00bcd4;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        section {
+            margin-bottom: 3rem;
+        }
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 0.5rem;
+        }
+        section p {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        .codice-arduino, .codice-php {
+            background-color: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: monospace;
+            color: #eee;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .codice-arduino h3, .codice-php h3{
+            font-size: 1.2rem;
+            color: #00bcd4;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .link-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #00bcd4;
+            color: #f0f0f0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-right: 1rem;
+        }
+        .link-button:hover {
+            background-color: #00869e;
+        }
+        .disclaimer {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 1rem;
+            border-top: 1px solid #444;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Cyber Reflection</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Introduzione</a></li>
+                <li><a href="architettura.html">Architettura</a></li>
+                <li><a href="rpi_server.html">Server RPi</a></li>
+                <li><a href="rpi_client.html">Client RPi</a></li>
+                <li><a href="arduino.html">Arduino</a></li>
+                <li><a href="integrazione.html">Integrazioni</a></li>
+                <li><a href="server.html">Home Assistant Server</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Integrazione con OpenMeteo e Tailscale</h2>
+            <p>
+                Questa sezione descrive come il progetto Cyber Reflection si integra con OpenMeteo per fornire dati meteorologici.
+            </p>
+        </section>
+        <section>
+            <h2>Configurazione di Tailscale per una VPN Sicura</h2>
+            <p>
+                Tailscale è stato selezionato come soluzione VPN per il progetto Cyber Reflection per diversi motivi chiave:
+            </p>
+            <ul>
+                <li><strong>Facilità di Implementazione:</strong> Tailscale semplifica notevolmente la creazione di una rete privata virtuale (VPN). A differenza delle VPN tradizionali che possono richiedere configurazioni complesse e costose, Tailscale permette di connettere dispositivi in modo rapido e semplice, anche attraverso firewall e NAT.</li>
+                <li><strong>Sicurezza e Privacy:</strong> Tailscale utilizza il protocollo WireGuard, noto per la sua sicurezza e le prestazioni elevate. Questo garantisce che la comunicazione tra i dispositivi nella rete Cyber Reflection sia crittografata e protetta da intercettazioni. Inoltre, Tailscale, per impostazione predefinita, non memorizza i contenuti del traffico degli utenti.</li>
+                <li><strong>Connettività Remota:</strong> Tailscale consente ai membri del team di accedere al Cyber Reflection e ai suoi servizi da qualsiasi luogo, come se si trovassero sulla stessa rete locale. Ciò facilita la collaborazione e la manutenzione del sistema da remoto.</li>
+                 <li><strong>Costi contenuti:</strong> Tailscale offre un piano gratuito che è sufficiente per la maggior parte degli usi personali e di piccoli team.</li>
+            </ul>
+            <p>
+                Tailscale crea una rete mesh tra i tuoi dispositivi. Ogni dispositivo esegue un software client che lo connette alla rete Tailscale. Una volta connessi, i dispositivi possono comunicare direttamente tra loro, come se si trovassero sulla stessa rete locale.
+            </p>
+            <h3>Configurazione di Tailscale</h3>
+            <p>
+                La configurazione di Tailscale è un processo semplice:
+            </p>
+            <ol>
+                <li><strong>Installazione:</strong> Installa il client Tailscale su ciascun dispositivo che desideri includere nella tua rete (Raspberry Pi, computer, smartphone, ecc.). Tailscale è disponibile per diverse piattaforme, tra cui Linux, macOS, Windows, iOS e Android.</li>
+                <li><strong>Autenticazione:</strong> Accedi al tuo account Tailscale su ciascun dispositivo. Puoi utilizzare un provider di identità esistente come Google, Microsoft o GitHub.</li>
+                <li><strong>Connessione:</strong> Una volta autenticati, i tuoi dispositivi saranno connessi alla tua rete Tailscale e potranno comunicare tra loro.</li>
+            </ol>
+            <p>
+                Per ulteriori informazioni su Tailscale, la sua architettura, le funzionalità e i piani tariffari, visita il sito ufficiale:
+            </p>
+            <ul>
+                <li><strong>Sito ufficiale di Tailscale:</strong> <a href="https://tailscale.com/">https://tailscale.com/</a></li>
+            </ul>
+        </section>
+        <section>
+            <h2>OpenMeteo</h2>
+            <p>
+                L'integrazione con l'API di OpenMeteo è cruciale per fornire dati meteorologici accurati e in tempo reale. La scelta è motivata da:
+            </p>
+            <ul>
+                <li><strong>Gratuità:</strong> Ampia gamma di dati meteorologici gratuiti.</li>
+                <li><strong>Numero di Chiamate API:</strong> 1000 chiamate al giorno, sufficienti per le esigenze del progetto.</li>
+                <li><strong>Ricchezza di Dati:</strong> Temperatura, umidità, vento, pressione, condizioni del cielo.</li>
+                <li><strong>Facilità di Utilizzo:</strong> Documentazione chiara e concisa.</li>
+            </ul>
+            <p>
+                OpenMeteo fornisce dati affidabili e aggiornati, migliorando l'esperienza utente del Cyber Reflection.
+            </p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Cyber Reflection Project | Documentazione</p>
+    </footer>
+</body>
+</html>

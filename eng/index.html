@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Reflection - Documentazione</title>
+    <title>Cyber Reflection - Documentation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
@@ -141,7 +141,7 @@
             border-radius: 10px;
         }
 
-        /* Stile per i link nelle card (opzionale, per maggior controllo) */
+        /* Style for links in cards (optional, for more control) */
         .card-link {
             text-decoration: none;
             color: inherit;
@@ -190,83 +190,83 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#introduzione">Introduzione</a></li>
-                <li><a href="docs/architettura.html">Architettura</a></li>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="docs/architettura.html">Architecture</a></li>
                 <li><a href="gdpr.html">GDPR</a></li>
-                <li><a href="php/chart.php">Grafici</a></li>
-                <li><a href="#implementazioni">Implementazioni</a></li>
-                <li><a href="#contatti">Contatti</a></li>
+                <li><a href="php/chart.php">Charts</a></li>
+                <li><a href="#implementations">Future Implementations</a></li>
+                <li><a href="#contacts">Contacts</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section id="introduzione" class="hero">
-            <h2>Specchio Digitale Smart</h2>
-            <p>Il progetto Cyber Reflection è uno specchio intelligente che integra funzionalità di domotica, visualizzazione dati e assistente vocale, progettato su Raspberry Pi e Home Assistant.</p>
-             <div class="language-select">
-                <a href="eng/index.html">English</a>
+        <section id="introduction" class="hero">
+            <h2>Smart Digital Mirror</h2>
+            <p>The Cyber Reflection project is a smart mirror that integrates home automation functionalities, data visualization, and a voice assistant, designed on Raspberry Pi and Home Assistant.</p>
+            <div class="language-select">
+                <a href="../index.html">Italiano</a>
             </div>
         </section>
 
-        <section id="architettura">
-            <h2>Architettura del Sistema</h2>
-            <p>Cyber Reflection è composto da un server privato con Home Assistant, due Raspberry Pi 3B e dispositivi IoT come Arduino per la raccolta e visualizzazione dei dati.</p>
-            <p>Un diagramma dell'architettura sarà disponibile nella sezione dedicata.</p>
+        <section id="architecture">
+            <h2>System Architecture</h2>
+            <p>Cyber Reflection is composed of a private server with Home Assistant, two Raspberry Pi 3Bs, and IoT devices like Arduino for data collection and visualization.</p>
+            <p>An architecture diagram will be available in the dedicated section.</p>
         </section>
 
-        <section id="componenti">
-            <h2>Componenti Principali</h2>
+        <section id="components">
+            <h2>Main Components</h2>
             <div class="cards">
                 <a href="docs/server.html" class="card">
-                    <h3>Server Privato (Home Assistant)</h3>
-                    <p>Gestisce automazioni, dispositivi e processa le richieste vocali.</p>
+                    <h3>Private Server (Home Assistant)</h3>
+                    <p>Manages automations, devices, and processes voice requests.</p>
                 </a>
                 <a href="docs/rpi_server.html" class="card">
                     <h3>Raspberry Pi - Web Server</h3>
-                    <p>Serve la UI del Cyber Reflection e comunica con Home Assistant.</p>
+                    <p>Serves the Cyber Reflection UI and communicates with Home Assistant.</p>
                 </a>
                 <a href="docs/rpi_client.html" class="card">
                     <h3>Raspberry Pi - Client Display</h3>
-                    <p>Visualizza le informazioni e invia le richieste vocali al server.</p>
+                    <p>Displays information and sends voice requests to the server.</p>
                 </a>
                 <a href="docs/arduino.html" class="card">
-                    <h3>Arduino & Sensori IoT</h3>
-                    <p>Raccoglie dati di temperatura e umidità, confrontandoli con API ufficiali.</p>
+                    <h3>Arduino & IoT Sensors</h3>
+                    <p>Collects temperature and humidity data, comparing it with official APIs.</p>
                 </a>
-                <a href="docs/configurazione.html" class="card">
-                    <h3>Configurazione</h3>
-                    <p>Guida alla configurazione di tutti i componenti software e hardware.</p>
+                 <a href="docs/configurazione.html" class="card">
+                    <h3>Configuration</h3>
+                    <p>Configuration guide for all software and hardware components.</p>
                 </a>
                 <a href="docs/integrazione.html" class="card">
-                    <h3>Integrazione OpenMeteo e Tailscale</h3>
-                    <p>Dettagli sull'integrazione con l'API di OpenMeteo per i dati meteorologici e della VPN grazie a Tailscale.</p>
+                    <h3>OpenMeteo and Tailscale Integration</h3>
+                    <p>Details on the integration with the OpenMeteo API for weather data and VPN thanks to Tailscale.</p>
                 </a>
             </div>
         </section>
 
-        <section id="implementazioni">
-            <h2>Possibili Implementazioni Future</h2>
+        <section id="implementations">
+            <h2>Possible Future Implementations</h2>
             <p>
-                Il progetto Cyber Reflection ha un grande potenziale per future espansioni e miglioramenti. Alcune delle possibili
-                implementazioni future includono:
+                The Cyber Reflection project has great potential for future expansions and improvements. Some of the possible
+                future implementations include:
             </p>
             <ul>
-                <li><strong>Integrazione di una vasta gamma di dispositivi IoT (meteorologici e domotici).</strong></li>
-                <li><strong>Ottimizzazione hardware:</strong> Utilizzo di Raspberry Pi di ultima generazione per maggiore velocità e minore complessità.</li>
-                <li><strong>Interfaccia mobile:</strong> Sviluppo di un'applicazione personalizzata per il controllo da smartphone.</li>
-                <li><strong>Scalabilità:</strong> Riprogettazione per raggiungere un pubblico più ampio.</li>
+                <li><strong>Integration of a wide range of IoT devices (weather and home automation).</strong></li>
+                <li><strong>Hardware optimization:</strong> Use of latest generation Raspberry Pis for greater speed and less complexity.</li>
+                <li><strong>Mobile interface:</strong> Development of a custom application for smartphone control.</li>
+                <li><strong>Scalability:</strong> Redesign to reach a wider audience.</li>
             </ul>
         </section>
-        <section id="contatti">
-            <h2>Contatti</h2>
-            <p>Il progetto è stato realizzato dal team di Cyber Reflection. Per domande o collaborazioni, contattaci via email a <a href="mailto:cybereflection@gmail.com">cybereflection@gmail.com</a>
+        <section id="contacts">
+            <h2>Contacts</h2>
+            <p>The project was created by the Cyber Reflection team. For questions or collaborations, contact us via email at <a href="mailto:cybereflection@gmail.com">cybereflection@gmail.com</a>
             </p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Cyber Reflection Project | Documentazione</p>
+        <p>&copy; 2025 Cyber Reflection Project | Documentation</p>
     </footer>
 </body>
 </html>
