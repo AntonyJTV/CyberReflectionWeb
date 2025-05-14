@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conformità GDPR - Cyber Reflection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #111;
+            color: #f0f0f0;
+            line-height: 1.7;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1e1e1e;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 1rem;
+            display: none;
+        }
+        .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #00bcd4;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        section {
+            margin-bottom: 3rem;
+        }
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 0.5rem;
+        }
+        section p {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        .codice-arduino, .codice-php {
+            background-color: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: monospace;
+            color: #eee;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .codice-arduino h3, .codice-php h3{
+            font-size: 1.2rem;
+            color: #00bcd4;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .link-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #00bcd4;
+            color: #f0f0f0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-right: 1rem;
+        }
+        .link-button:hover {
+            background-color: #00869e;
+        }
+        .disclaimer {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 1rem;
+            border-top: 1px solid #444;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Cyber Reflection</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Introduzione</a></li>
+                <li><a href="architettura.html">Architettura</a></li>
+                <li><a href="rpi_server.html">Server RPi</a></li>
+                <li><a href="rpi_client.html">Client RPi</a></li>
+                <li><a href="arduino.html">Arduino</a></li>
+                <li><a href="integrazione.html">Integrazioni</a></li>
+                <li><a href="server.html">Home Assistant Server</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Dichiarazione di Conformità al GDPR per il Progetto "Cyber Reflection"</h2>
+            <p>
+                Il progetto "Cyber Reflection", uno smart mirror innovativo, pone la massima priorità sulla protezione dei dati personali dei suoi utenti in conformità con il Regolamento Generale sulla Protezione dei Dati (GDPR) dell'Unione Europea.
+            </p>
+            <p>
+                Comprendiamo l'importanza della privacy e abbiamo progettato "Cyber Reflection" con funzionalità specifiche per garantire la tutela delle informazioni personali:
+            </p>
+            <ul>
+                <li><strong>Comunicazione Sicura tramite VPN Integrata:</strong> "Cyber Reflection" è dotato di una Virtual Private Network (VPN) integrata. Questa tecnologia crea un tunnel crittografato per tutte le comunicazioni di rete, proteggendo i dati da accessi non autorizzati e intercettazioni esterne durante il loro transito.</li>
+                <li><strong>Elaborazione Intelligente Locale o Personale:</strong> Ove possibile e pertinente, "Cyber Reflection" sfrutta l'Intelligenza Artificiale (AI) per l'elaborazione dei dati direttamente sul dispositivo o su un ambiente personale controllato dall'utente. Questo approccio minimizza la necessità di trasferire dati sensibili a server esterni, riducendo significativamente i rischi associati alla loro gestione e conservazione.</li>
+                 <li><strong>Conservazione dei dati:</strong> I dati raccolti dalle schede sono conservati esclusivamente all'interno delle schede stesse e nei loro database.</li>
+            </ul>
+            <p>
+                Attraverso l'implementazione di una VPN e l'utilizzo di capacità di AI locali o personali, "Cyber Reflection" si impegna a fornire un ambiente sicuro e rispettoso della privacy, consentendo agli utenti di beneficiare delle funzionalità avanzate dello smart mirror con la tranquillità che i loro dati personali siano protetti in linea con i principi del GDPR.
+            </p>
+            <p>
+                Questa dichiarazione riflette il nostro attuale approccio alla conformità GDPR e sarà soggetta a revisioni e aggiornamenti continui per garantire il massimo livello di protezione dei dati.
+            </p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Cyber Reflection Project | Documentazione</p>
+    </footer>
+</body>
+</html>

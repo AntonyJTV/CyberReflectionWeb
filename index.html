@@ -3,115 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Cyber_Reflection</title>
+    <title>Cyber Reflection - Documentazione</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #111;
+            color: #f0f0f0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1e1e1e;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 1rem;
+            display: none;
+        }
+
+        .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00bcd4;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        section h2 {
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100%;
+            box-sizing: border-box;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,188,212,0.5);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #eee;
+        }
+
+        .card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2rem auto;
+            border-radius: 10px;
+        }
+
+        /* Stile per i link nelle card (opzionale, per maggior controllo) */
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="logo">
+            <h1>Cyber Reflection</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#introduzione">Introduzione</a></li>
+                <li><a href="docs/architettura.html">Architettura</a></li>
+                <li><a href="docs/gdpr.html">GDPR</a></li>
+                <li><a href="docs/chart.php">Grafici</a></li>
+                <li><a href="#implementazioni">Implementazioni</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="container">
-        <!-- Sezione Presentazione -->
-        <section class="section" id="home">
-            <div class="mirror-glass">
-                <header>
-                    <h1>Cyber_Reflection</h1>
-                    <p>Un'interfaccia smart per la tua casa, con meteo, notifiche e controllo IoT.</p>
-                </header>
-                <section class="features">
-                    <h2>Caratteristiche</h2>
-                    <div class="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item">💡 Controllo vocale e gestuale</div>
-                            <div class="carousel-item">🌍 Integrazione con dispositivi IoT</div>
-                            <div class="carousel-item">📊 Visualizzazione meteo e notifiche</div>
-                            <div class="carousel-item">🔒 Connessione sicura con VPN</div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <!-- Freccia animata -->
-            <div class="scroll-down">
-                <span>&#x2193;</span> <!-- Simbolo Unicode della freccia verso il basso -->
+    <main>
+        <section id="introduzione" class="hero">
+            <h2>Specchio Digitale Smart</h2>
+            <p>Il progetto Cyber Reflection è uno specchio intelligente che integra funzionalità di domotica, visualizzazione dati e assistente vocale, progettato su Raspberry Pi e Home Assistant.</p>
+        </section>
+
+        <section id="architettura">
+            <h2>Architettura del Sistema</h2>
+            <p>Cyber Reflection è composto da un server privato con Home Assistant, due Raspberry Pi 3B e dispositivi IoT come Arduino per la raccolta e visualizzazione dei dati.</p>
+            <p>Un diagramma dell'architettura sarà disponibile nella sezione dedicata.</p>
+        </section>
+
+        <section id="componenti">
+            <h2>Componenti Principali</h2>
+            <div class="cards">
+                <a href="docs/server.html" class="card">
+                    <h3>Server Privato (Home Assistant)</h3>
+                    <p>Gestisce automazioni, dispositivi e processa le richieste vocali.</p>
+                </a>
+                <a href="docs/rpi_server.html" class="card">
+                    <h3>Raspberry Pi - Web Server</h3>
+                    <p>Serve la UI del Cyber Reflection e comunica con Home Assistant.</p>
+                </a>
+                <a href="docs/rpi_client.html" class="card">
+                    <h3>Raspberry Pi - Client Display</h3>
+                    <p>Visualizza le informazioni e invia le richieste vocali al server.</p>
+                </a>
+                <a href="docs/arduino.html" class="card">
+                    <h3>Arduino & Sensori IoT</h3>
+                    <p>Raccoglie dati di temperatura e umidità, confrontandoli con API ufficiali.</p>
+                </a>
+                <a href="docs/configurazione.html" class="card">
+                    <h3>Configurazione</h3>
+                    <p>Guida alla configurazione di tutti i componenti software e hardware.</p>
+                </a>
+                <a href="docs/integrazione.html" class="card">
+                    <h3>Integrazione OpenMeteo e Tailscale</h3>
+                    <p>Dettagli sull'integrazione con l'API di OpenMeteo per i dati meteorologici e della VPN grazie a Tailscale.</p>
+                </a>
             </div>
         </section>
 
-        <section class="section" id="home_assistant">
-            <h2>Home Assistant</h2>
-            <p>Home Assistant è il software open source per l'automazione domestica.</p>
-            <div class="buttons">
-                <a href="home_assistant/index.html" class="btn">Home Assistant</a>
-            </div>
-            <!-- Freccia animata -->
-            <div class="scroll-down">
-                <span>&#x2193;</span>
-            </div>
+        <section id="implementazioni">
+            <h2>Possibili Implementazioni Future</h2>
+            <p>
+                Il progetto Cyber Reflection ha un grande potenziale per future espansioni e miglioramenti. Alcune delle possibili
+                implementazioni future includono:
+            </p>
+            <ul>
+                <li><strong>Integrazione di una vasta gamma di dispositivi IoT (meteorologici e domotici).</strong></li>
+                <li><strong>Ottimizzazione hardware:</strong> Utilizzo di Raspberry Pi di ultima generazione per maggiore velocità e minore complessità.</li>
+                <li><strong>Interfaccia mobile:</strong> Sviluppo di un'applicazione personalizzata per il controllo da smartphone.</li>
+                <li><strong>Scalabilità:</strong> Riprogettazione per raggiungere un pubblico più ampio.</li>
+            </ul>
         </section>
-
-        <section class="section" id="vpn">
-            <h2>Tailscale</h2>
-            <p>Tailscale permette la creazione di una VPN gratuita utilizzando i nostri dispositivi personali</p>
-            <div class="buttons">
-                <a href="tailscale\index.php" class="btn">Stazione Meteo</a>
-            </div>
-            <!-- Freccia animata -->
-            <div class="scroll-down">
-                <span>&#x2193;</span>
-            </div>
+        <section id="contatti">
+            <h2>Contatti</h2>
+            <p>Il progetto è stato realizzato dal team di Cyber Reflection. Per domande o collaborazioni, contattaci via email a <a href="mailto:cybereflection@gmail.com">cybereflection@gmail.com</a>
+            </p>
         </section>
-        
-        <section class="section" id="webserver">
-            <h2>WebServer</h2>
-            <p>Il WebServer fornisce un'interfaccia per gestire il sistema da remoto.</p>
-            <div class="buttons">
-                <a href="webserver\index.html" class="btn">WebServer</a>
-            </div>
-            <!-- Freccia animata -->
-            <div class="scroll-down">
-                <span>&#x2193;</span>
-            </div>
-        </section>
+    </main>
 
-        <!-- Sezioni che scorrono -->
-        <section class="section" id="arduino">
-            <h2>Arduino Portenta H7</h2>
-            <p>Arduino Portenta H7 è il centro dei sensori meteorologici di temperatura e umidità, che inviano i dati nel database della Stazione Meteo</p>
-            <div class="buttons">
-                <a href="arduino/index.html" class="btn">Arduino Portenta H7</a>
-            </div>
-            <div class="scroll-down">
-                <span>&#x2193;</span>
-            </div>
-        </section>
-        
-        <section class="section" id="stazione meteo">
-            <h2>Stazione meteo</h2>
-            <p>La stazione meteo permette di visionare il tempo rilevato in tempo reale dall'arduino portenta h7</p>
-            <div class="buttons">
-                <a href="stazione_meteo\meteo.php" class="btn">Stazione Meteo</a>
-            </div>
-            <!-- Freccia animata -->
-            <div class="scroll-down">
-                <span>&#x2193;</span>
-            </div>
-        </section>
-
-
-        <!-- <section class="section" id="pygesture">
-            <h2>PyGesture</h2>
-            <p>PyGesture permette il controllo gestuale del sistema, offrendo un'interazione naturale.</p>
-            <div class="buttons">
-                <a href="pygesture\index.html" class="btn">PyGesture</a>
-            </div>
-            <1!-- Freccia animata --1>
-            <div class="scroll-down">
-                <span>&#x2193;</span>
-            </div>
-        </section> -->
-
-        <footer class="section">
-            <p>Progetto realizzato da Matteo Marangi e Antonio D'Alconzo</p>
-        </footer>
-    </div>
-
-    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2025 Cyber Reflection Project | Documentazione</p>
+    </footer>
 </body>
 </html>

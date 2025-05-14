@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurazione Hardware Cyber Reflection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #111;
+            color: #f0f0f0;
+            line-height: 1.7;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1e1e1e;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 1rem;
+            display: none;
+        }
+        .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #00bcd4;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        section {
+            margin-bottom: 3rem;
+        }
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 0.5rem;
+        }
+        section p {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        .codice-arduino, .codice-php {
+            background-color: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: monospace;
+            color: #eee;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .codice-arduino h3, .codice-php h3{
+            font-size: 1.2rem;
+            color: #00bcd4;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .link-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #00bcd4;
+            color: #f0f0f0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-right: 1rem;
+        }
+        .link-button:hover {
+            background-color: #00869e;
+        }
+        .disclaimer {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 1rem;
+            border-top: 1px solid #444;
+            padding-top: 1rem;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .image-container img {
+            max-width: 80%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Cyber Reflection</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Introduzione</a></li>
+                <li><a href="architettura.html">Architettura</a></li>
+                <li><a href="rpi_server.html">Server RPi</a></li>
+                <li><a href="rpi_client.html">Client RPi</a></li>
+                <li><a href="arduino.html">Arduino</a></li>
+                <li><a href="integrazione.html">Integrazioni</a></li>
+                <li><a href="server.html">Home Assistant Server</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Configurazione Hardware</h2>
+            <p>
+                Questa sezione descrive in dettaglio la configurazione hardware del Cyber Reflection, inclusa la costruzione della scatola dei sensori e dello specchio.
+            </p>
+        </section>
+
+        <section>
+            <h3>Costruzione della Scatola dei Sensori</h3>
+            <p>
+                La scatola dei sensori è stata realizzata utilizzando una scatola da elettricisti per proteggere i componenti elettronici e facilitare l'installazione. All'interno della scatola sono alloggiati:
+            </p>
+            <ul>
+                <li>Unità di elaborazione: Arduino Portenta</li>
+                <li>Breadboard: Per la connessione e prototipazione dei circuiti</li>
+                <li>Sensore di umidità: DHT11, con il sensore posizionato all'esterno della scatola per rilevare l'umidità ambientale</li>
+            </ul>
+            <p>
+                Per garantire un'alimentazione continua, un power bank è collegato all'Arduino Portenta. Il power bank è posizionato sopra il coperchio della scatola ed è ricaricato tramite un pannello solare. Questa configurazione consente al sistema di funzionare autonomamente, senza necessità di alimentazione esterna costante.
+            </p>
+            <div class="image-container">
+                <img src="img/sensor_box.jpg" alt="Scatola dei Sensori">
+            </div>
+            <p><i>Schema della scatola dei sensori.</i></p>
+        </section>
+
+        <section>
+            <h3>Costruzione dello Specchio</h3>
+            <p>
+                La struttura dello specchio è stata progettata per essere elegante e funzionale, integrandosi perfettamente in un ambiente domestico. Per semplificare la visualizzazione e la comprensione della struttura, è stata utilizzata una rappresentazione 3D.
+            </p>
+            <p>
+                Lo specchio è composto da un telaio che supporta uno schermo LCD e uno specchio semiriflettente. I componenti elettronici sono alloggiati in uno scomparto posteriore, nascosto alla vista dell'utente.
+            </p>
+            <div class="image-container">
+                <img src="img/mirror.jpg" alt="Struttura dello Specchio">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Cyber Reflection Project | Documentazione</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentazione Arduino H7</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #111;
+            color: #f0f0f0;
+            line-height: 1.7;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1e1e1e;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 1rem;
+            display: none;
+        }
+        .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #00bcd4;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        section {
+            margin-bottom: 3rem;
+        }
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 0.5rem;
+        }
+        section p {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        .codice-arduino, .codice-php {
+            background-color: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: monospace;
+            color: #eee;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .codice-arduino h3, .codice-php h3{
+            font-size: 1.2rem;
+            color: #00bcd4;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .link-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #00bcd4;
+            color: #f0f0f0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-right: 1rem;
+        }
+        .link-button:hover {
+            background-color: #00869e;
+        }
+        .disclaimer {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 1rem;
+            border-top: 1px solid #444;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Cyber Reflection</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Introduzione</a></li>
+                <li><a href="architettura.html">Architettura</a></li>
+                <li><a href="rpi_server.html">Server RPi</a></li>
+                <li><a href="rpi_client.html">Client RPi</a></li>
+                <li><a href="arduino.html">Arduino</a></li>
+                <li><a href="integrazione.html">Integrazioni</a></li>
+                <li><a href="server.html">Home Assistant Server</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Arduino H7</h2>
+            <p>
+                L'Arduino H7 è una potente scheda di sviluppo che combina un microcontrollore Arm® Cortex®-M7 e Cortex®-M4.  Questa dualità consente di eseguire codice in tempo reale ad alte prestazioni insieme a compiti di elaborazione più complessi. È ideale per progetti che richiedono elevate prestazioni di calcolo, connettività avanzata e flessibilità.
+            </p>
+            <p>
+                <b>Caratteristiche principali:</b>
+            </p>
+            <ul>
+                <li>Microcontrollore dual-core (Arm® Cortex®-M7 e Cortex®-M4)</li>
+                <li>Elevata velocità di clock</li>
+                <li>Ampia memoria Flash e RAM</li>
+                <li>Ricche periferiche di I/O (Ethernet, USB, CAN, ecc.)</li>
+                <li>Supporto per diverse interfacce di comunicazione</li>
+            </ul>
+            <a href="https://store.arduino.cc/products/arduino-due" target="_blank" class="link-button">Acquista Arduino H7</a>
+            <a href="https://www.arduino.cc/en/software" target="_blank" class="link-button">Scarica Arduino IDE</a>
+            <p class="disclaimer">
+                I link sopra riportati sono collegamenti ai siti ufficiali per l'acquisto della scheda Arduino H7 e per il download dell'Arduino IDE.  Si prega di verificare sempre le informazioni più recenti sui siti ufficiali.
+            </p>
+        </section>
+
+        <section>
+            <h2>Codice Arduino</h2>
+            <p>
+                Questo codice è progettato per essere eseguito su una scheda Arduino H7 e ha lo scopo di raccogliere dati da un sensore DHT11 (temperatura e umidità) e inviarli a un server remoto tramite Wi-Fi.
+            </p>
+            <div class="codice-arduino">
+                <h3>Codice Arduino per la raccolta e l'invio dei dati:</h3>
+                <pre><code>
+#include &lt;WiFi.h&gt;
+#include &lt;ArduinoHttpClient.h&gt;
+#include "DHT.h"
+
+// Configurazione Wi-Fi
+const char* ssid = "NOME_RETE_WIFI";     // Sostituisci con il nome della tua rete Wi-Fi
+const char* password = "PASSWORD_WIFI"; // Sostituisci con la password della tua rete Wi-Fi
+
+// Configurazione Server
+const char* serverIP = "IP_SERVER"; // Sostituisci con l'indirizzo IP del tuo server
+const int serverPort = 80;         // Porta del server (generalmente 80 per HTTP)
+const char* httpEndpoint = "/percorso/script_server.php"; // Sostituisci con il percorso dello script PHP sul server
+
+// Sensori
+#define DHTPIN 5  // Pin a cui è collegato il sensore DHT11
+#define DHTTYPE DHT11 // Tipo di sensore DHT (DHT11 o DHT22)
+
+DHT dht(DHTPIN, DHTTYPE);
+WiFiClient wifiClient;
+HttpClient client = HttpClient(wifiClient, serverIP, serverPort);
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+
+  Serial.println("Connessione a Wi-Fi...");
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nConnesso!");
+  Serial.print("Indirizzo IP: ");
+  Serial.println(WiFi.localIP());
+
+  dht.begin();
+}
+
+void loop() {
+  // Lettura DHT11
+  float tempDHT = dht.readTemperature();
+  float humDHT = dht.readHumidity();
+
+  if (isnan(tempDHT) || isnan(humDHT)) {
+    Serial.println("Errore lettura DHT11.");
+  } else {
+    // Costruzione dei dati POST
+    String postData = "temp_dht=" + String(tempDHT, 1) +
+                        "&hum_dht=" + String(humDHT, 1);
+
+    Serial.println("Invio dati al server:");
+    Serial.println(postData);
+
+    client.post(httpEndpoint, "application/x-www-form-urlencoded", postData);
+
+    int statusCode = client.responseStatusCode();
+    String response = client.responseBody();
+
+    Serial.print("Codice HTTP: ");
+    Serial.println(statusCode);
+    Serial.print("Risposta server: ");
+    Serial.println(response);
+  }
+
+  delay(60000); // Attesa tra invii (60 secondi)
+}
+                </code></pre>
+            </div>
+            <p>
+                <b>Note sul codice:</b>
+            </p>
+            <ul>
+                <li>
+                    Le librerie <code>WiFi.h</code>, <code>ArduinoHttpClient.h</code> e <code>DHT.h</code> sono utilizzate per la connessione Wi-Fi, l'invio di richieste HTTP e la lettura dei dati dal sensore DHT11, rispettivamente.
+                </li>
+                <li>
+                    Le variabili <code>ssid</code> e <code>password</code> devono essere sostituite con le credenziali della tua rete Wi-Fi.
+                </li>
+                 <li>
+                    La variabile `serverIP` deve essere sostituita con l'indirizzo IP del server a cui inviare i dati.
+                </li>
+                <li>
+                    La variabile `httpEndpoint` deve corrispondere al percorso dello script PHP sul server che gestirà i dati ricevuti.
+                </li>
+                <li>
+                    Il sensore DHT11 è collegato al pin 5 di Arduino, ma può essere modificato se necessario.
+                </li>
+                <li>
+                    I dati di temperatura e umidità vengono letti dal sensore DHT11 e inviati al server tramite una richiesta POST ogni 60 secondi.
+                </li>
+                 <li>
+                    Il codice presuppone che sul server sia presente uno script PHP (`forward_data.php`) per ricevere ed elaborare i dati.
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Configurazione Raspberry Pi e Gestione Dati</h2>
+            <p>
+                Dopo aver configurato i Raspberry Pi come descritto nei documenti <a href="rpi_client.html">Client RPi</a> e <a href="rpi_server.html">Server RPi</a>, è necessario predisporre il server per ricevere ed elaborare i dati inviati da Arduino.
+            </p>
+            <p>
+                Sul <b>Raspberry Pi Client</b>, è stato creato lo script <code>forward_data.php</code> per ricevere i dati da Arduino e inoltrarli al server principale.
+            </p>
+            <div class="codice-php">
+                 <h3>Codice PHP (forward_data.php)</h3>
+                <pre><code>
+&lt;?php
+session_start();
+
+$buffer_interval = 300; // 5 minuti in secondi
+$current_time = time();
+
+if (!isset($_SESSION['last_forwarding_time'])) {
+    $_SESSION['last_forwarding_time'] = $current_time - $buffer_interval;
+}
+
+if (!isset($_SESSION['data_buffer'])) {
+    $_SESSION['data_buffer'] = [];
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['temp_dht'], $_POST['hum_dht'])) {
+    $_SESSION['data_buffer'] = [
+        'temp_dht' => $_POST['temp_dht'],
+        'hum_dht'  => $_POST['hum_dht'],
+        'timestamp' => date('Y-m-d H:i:s', $current_time),
+    ];
+    echo "Dati ricevuti e aggiunti al buffer.\\n";
+}
+
+if ($current_time - $_SESSION['last_forwarding_time'] >= $buffer_interval) {
+    if (!empty($_SESSION['data_buffer'])) {
+        $post_data = http_build_query($_SESSION['data_buffer']);
+        $url_save_data = "http://INDIRIZZO_IP_SERVER/save_data.php"; // Sostituisci con l'IP del server
+
+        $ch = curl_init($url_save_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curl_error = curl_error($ch);
+        curl_close($ch);
+
+        if ($http_code >= 200 && $http_code < 300) {
+            echo "Dati inoltrati con successo a save_data.php. Risposta: " . $response . "\\n";
+        } else {
+            echo "Errore nell'inoltro a save_data.php. Codice HTTP: " . $http_code . ", Errore cURL: " . $curl_error . ", Risposta: " . $response . "\\n";
+        }
+    } else {
+        echo "Nessun dato da inoltrare.\\n";
+    }
+    $_SESSION['last_forwarding_time'] = $current_time;
+    $_SESSION['data_buffer'] = [];
+} else {
+    echo "Attesa del prossimo invio dati.\\n";
+}
+?>
+                </code></pre>
+            </div>
+            <p>
+                <b>Note sul codice:</b>
+            </p>
+            <ul>
+                <li>
+                  Lo script `forward_data.php` riceve i dati da Arduino tramite una richiesta POST.
+                </li>
+                <li>
+                    I dati vengono memorizzati in un buffer di sessione e inoltrati allo script <code>save_data.php</code> sul server ogni 5 minuti.
+                </li>
+                <li>
+                    La funzione `http_build_query()` è utilizzata per convertire l'array di dati in una stringa URL-encoded.
+                 </li>
+                <li>
+                    La variabile `$url_save_data` deve essere aggiornata con l'indirizzo IP del server su cui è presente lo script `save_data.php`.
+                </li>
+                <li>
+                    Vengono gestiti eventuali errori durante l'inoltro dei dati tramite cURL.
+                </li>
+            </ul>
+            <p>
+                Sul <b>Raspberry Pi Server</b>, è stato configurato un database MySQL (`arduino_data`) con una tabella (`sensor_data`) per memorizzare i dati ricevuti.  Lo script <code>save_data.php</code> gestisce l'inserimento dei dati nel database.
+            </p>
+            <div class="codice-php">
+                <h3>Codice PHP (save_data.php)</h3>
+                <pre><code>
+&lt;?php
+// Dettagli di connessione al database
+$servername = "localhost";
+$username = "DATABASE_USERNAME";      
+$password = "DATABASE_PASSWORD";
+$dbname = "DATABASE_NAME";
+
+// Crea connessione
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verifica connessione
+if ($conn->connect_error) {
+    die("Connessione al database fallita: " . $conn->connect_error);
+}
+
+// Ottieni i dati POST
+$temp_dht = $_POST['temp_dht'] ?? null;
+$hum_dht = $_POST['hum_dht'] ?? null;
+$timestamp = $_POST['timestamp'] ?? null; // Ottieni il timestamp
+
+// Verifica che i dati siano validi
+if ($temp_dht !== null && $hum_dht !== null && $timestamp !== null) {
+    // Query SQL per inserire i dati CON timestamp
+    $sql = "INSERT INTO sensor_data (temp_dht, hum_dht, timestamp) VALUES (?, ?, ?)";
+
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("dds", $temp_dht, $hum_dht, $timestamp); // "dds" per double, double, string
+
+        if ($stmt->execute()) {
+            echo "Dati salvati con successo.";
+        } else {
+            echo "Errore durante il salvataggio: " . $stmt->error;
+        }
+
+        $stmt->close();
+    } else {
+        echo "Errore nella preparazione della query: " . $conn->error;
+    }
+} else {
+    echo "Dati mancanti: temp_dht, hum_dht, timestamp richiesti.";
+}
+
+$conn->close();
+?>
+                </code></pre>
+            </div>
+            <p>
+                <b>Note sul codice:</b>
+            </p>
+            <ul>
+                <li>
+                    Le variabili `$servername`, `$username`, `$password` e `$dbname` devono essere sostituite con le credenziali del tuo database MySQL.
+                </li>
+                <li>
+                    Lo script `save_data.php` riceve i dati da <code>forward_data.php</code> tramite una richiesta POST.
+                </li>
+                <li>
+                    Viene creata una connessione al database e i dati vengono inseriti nella tabella `sensor_data`.
+                 </li>
+                 <li>
+                    La query SQL include ora un campo `timestamp` per memorizzare la data e l'ora di ricezione dei dati.
+                 </li>
+                <li>
+                    Vengono gestiti eventuali errori durante la connessione al database e l'inserimento dei dati.
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Creazione del Database MySQL</h2>
+            <p>
+                Per memorizzare i dati dei sensori, è necessario creare un database MySQL e una tabella al suo interno.  Di seguito sono riportate le istruzioni per creare il database <code>arduino_data</code> e la tabella <code>sensor_data</code> con i campi appropriati.
+            </p>
+
+            <h3>Creazione del Database</h3>
+            <p>
+                Puoi creare il database utilizzando un client MySQL come phpMyAdmin, MySQL Workbench, oppure tramite la riga di comando.  Se utilizzi la riga di comando, puoi usare il seguente comando:
+            </p>
+            <pre><code>
+CREATE DATABASE arduino_data;
+            </code></pre>
+            <p>
+                Questo comando crea un database chiamato <code>arduino_data</code>.
+            </p>
+
+            <h3>Creazione della Tabella</h3>
+            <p>
+                Dopo aver creato il database, devi creare la tabella <code>sensor_data</code> al suo interno.  La tabella conterrà i campi per memorizzare l'ID del record, la temperatura, l'umidità e il timestamp.  Ecco la struttura della tabella:
+            </p>
+             <ul>
+                <li><b>Nome Tabella:</b> sensor_data</li>
+            </ul>
+            <p>
+                Di seguito la definizione dei campi della tabella:
+            </p>
+            <ol>
+                <li>
+                    <b>id</b>
+                    <ul>
+                        <li><b>Tipo:</b> INT(11)</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Chiave:</b> Primary Key, Auto Increment</li>
+                        <li><b>Descrizione:</b> Identificatore univoco per ogni record.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>temp_dht</b>
+                    <ul>
+                        <li><b>Tipo:</b> DOUBLE</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                         <li><b>Descrizione:</b> Temperatura misurata dal sensore DHT.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>hum_dht</b>
+                    <ul>
+                        <li><b>Tipo:</b> DOUBLE</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Descrizione:</b> Umidità misurata dal sensore DHT.</li>
+                    </ul>
+                </li>
+                 <li>
+                    <b>timestamp</b>
+                    <ul>
+                        <li><b>Tipo:</b> TIMESTAMP</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Valore Predefinito:</b> CURRENT_TIMESTAMP</li>
+                        <li><b>Descrizione:</b> Data e ora in cui i dati sono stati ricevuti.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <p>
+                Per creare la tabella, puoi usare il seguente comando SQL:
+            </p>
+            <pre><code>
+CREATE TABLE sensor_data (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    temp_dht DOUBLE NOT NULL,
+    hum_dht DOUBLE NOT NULL,
+    timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+            </code></pre>
+
+            <p>
+                Questo comando crea la tabella <code>sensor_data</code> con i campi specificati.  Il campo <code>id</code> è impostato come chiave primaria e si incrementa automaticamente per ogni nuovo record. Il campo <code>timestamp</code> è impostato per inserire automaticamente la data e l'ora corrente.
+            </p>
+            <p>
+                Una volta che i dati sono stati raccolti e memorizzati nel database, è possibile visualizzarli graficamente tramite lo script <a href="chart.php">chart.php</a>.
+            </p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Cyber Reflection Project | Documentazione</p>
+    </footer>
+</body>
+</html>

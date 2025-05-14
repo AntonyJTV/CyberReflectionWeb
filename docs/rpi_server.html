@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurazione Raspberry Pi Server</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #111;
+            color: #f0f0f0;
+            line-height: 1.7;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1e1e1e;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 1rem;
+            display: none;
+        }
+        .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #00bcd4;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        section {
+            margin-bottom: 3rem;
+        }
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 0.5rem;
+        }
+        section p {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        .codice-php {
+            background-color: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: monospace;
+            color: #eee;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .codice-php h3{
+            font-size: 1.2rem;
+            color: #00bcd4;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Cyber Reflection</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Introduzione</a></li>
+                <li><a href="architettura.html">Architettura</a></li>
+                <li><a href="rpi_server.html">Server RPi</a></li>
+                <li><a href="rpi_client.html">Client RPi</a></li>
+                <li><a href="arduino.html">Arduino</a></li>
+                <li><a href="integrazione.html">Integrazioni</a></li>
+                <li><a href="server.html">Home Assistant Server</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Configurazione Raspberry Pi 3B come Server</h2>
+            <p>
+                Il Raspberry Pi 3B è configurato come server web per gestire i dati provenienti dai sensori e fornire funzionalità al Cyber Reflection. La configurazione di base include l'installazione e la configurazione di Apache2, MariaDB/MySQL e l'integrazione con l'API di OpenMeteo per i dati meteorologici.
+            </p>
+
+            <h3>Software Installato e Configurato</h3>
+            <ul>
+                <li><b>Apache2:</b> Server web utilizzato per ospitare gli script PHP che gestiscono la comunicazione e l'elaborazione dei dati.</li>
+                <li><b>MariaDB/MySQL:</b> Sistema di gestione di database utilizzato per memorizzare i dati dei sensori (temperatura, umidità, ecc.) e i dati meteorologici.</li>
+                <li><b>PHP:</b> Linguaggio di scripting utilizzato per scrivere gli script che interagiscono con il database, recuperano i dati dall'API di OpenMeteo e comunicano con il Raspberry Pi Client.</li>
+                <li><b>OpenMeteo API:</b> Utilizzata per ottenere dati meteorologici in tempo reale, che vengono poi memorizzati nel database.</li>
+            </ul>
+
+            <h3>Database: arduino_data</h3>
+            <p>
+                I dati meteorologici ottenuti dall'API di OpenMeteo sono memorizzati nella tabella <code>weather_api_data</code> all'interno del database <code>arduino_data</code>. La tabella ha la seguente struttura:
+            </p>
+             <ul>
+                <li><b>Nome Tabella:</b> weather_api_data</li>
+            </ul>
+            <p>
+                Di seguito la definizione dei campi della tabella:
+            </p>
+            <ol>
+                <li>
+                    <b>id</b>
+                    <ul>
+                        <li><b>Tipo:</b> INT(11)</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Chiave:</b> Primary Key, Auto Increment</li>
+                        <li><b>Descrizione:</b> Identificatore univoco per ogni record.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>timestamp</b>
+                    <ul>
+                        <li><b>Tipo:</b> DATETIME</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Valore Predefinito:</b> CURRENT_TIMESTAMP</li>
+                        <li><b>Descrizione:</b> Data e ora in cui i dati sono stati ricevuti.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>temperature</b>
+                    <ul>
+                        <li><b>Tipo:</b> DOUBLE</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Descrizione:</b> Temperatura attuale.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>humidity</b>
+                    <ul>
+                        <li><b>Tipo:</b> DOUBLE</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Descrizione:</b> Umidità relativa.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>is_day</b>
+                    <ul>
+                        <li><b>Tipo:</b> TINYINT(1)</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Descrizione:</b> Indica se è giorno (1) o notte (0).</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>weather_code</b>
+                    <ul>
+                        <li><b>Tipo:</b> INT(11)</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Descrizione:</b> Codice che rappresenta le condizioni meteo.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>pressure</b>
+                    <ul>
+                        <li><b>Tipo:</b> DOUBLE</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Descrizione:</b> Pressione atmosferica.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>wind_speed</b>
+                    <ul>
+                        <li><b>Tipo:</b> DOUBLE</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Descrizione:</b> Velocità del vento.</li>
+                    </ul>
+                </li>
+                <li>
+                    <b>apparent_temperature</b>
+                    <ul>
+                        <li><b>Tipo:</b> DOUBLE</li>
+                        <li><b>Attributi:</b> Not Null</li>
+                        <li><b>Descrizione:</b> Temperatura percepita.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Script per l'Invio dei Dati Meteo: meteo_to_db.php</h3>
+            <p>
+                Il file <code>meteo_to_db.php</code>, situato nella directory <code>/var/www/html</code>, è responsabile dell'invio dei dati meteorologici dall'API di OpenMeteo al database.
+            </p>
+            <div class="codice-php">
+                <h3>Codice PHP (meteo_to_db.php)</h3>
+                <pre><code>
+&lt;?php
+// Configura i dati di accesso al database
+$host = 'localhost';
+$db   = 'arduino_data';
+$user = 'root'; // <-- INSERISCI QUI IL TUO UTENTE DB -->
+$pass = '***';  // <-- INSERISCI QUI LA TUA PASSWORD DB -->
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (\PDOException $e) {
+    die("Errore di connessione al DB: " . $e->getMessage());
+}
+
+// Coordinate esempio (puoi cambiarle)
+$latitude = 40.85;
+$longitude = 17.36;
+
+// Costruisci URL dell'API Open-Meteo (con i parametri corretti)
+$apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&current=temperature_2m,relative_humidity_2m,is_day,weather_code,surface_pressure,wind_speed_10m,apparent_temperature";
+
+// Aggiungi un User-Agent per evitare il 403 Forbidden
+$opts = [
+    "http" => [
+        "method" => "GET",
+        "header" => "User-Agent: Mozilla/5.0\\r\\n"
+    ]
+];
+$context = stream_context_create($opts);
+$response = file_get_contents($apiUrl, false, $context);
+
+if ($response === FALSE) {
+    die("Errore nella richiesta all'API");
+}
+
+$data = json_decode($response, true);
+if (!isset($data['current'])) {
+    die("Risposta API non valida");
+}
+
+$current = $data['current'];
+
+$timestamp = date('Y-m-d H:i:s');
+$temperature = $current['temperature_2m'];
+$humidity = $current['relative_humidity_2m'];
+$is_day = $current['is_day'];
+$weather_code = $current['weather_code'];
+$pressure = $current['surface_pressure'];
+$wind_speed = $current['wind_speed_10m'];
+$apparent_temperature = $current['apparent_temperature'];
+
+// Inserisci nel DB
+$sql = "INSERT INTO weather_api_data
+    (timestamp, temperature, humidity, is_day, weather_code, pressure, wind_speed, apparent_temperature)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute([
+    $timestamp,
+    $temperature,
+    $humidity,
+    $is_day,
+    $weather_code,
+    $pressure,
+    $wind_speed,
+    $apparent_temperature
+]);
+
+echo "Dati meteo inseriti con successo!";
+?>
+                </code></pre>
+            </div>
+            <p>
+                <b>Funzionalità:</b>
+            </p>
+            <ul>
+                <li>Configura la connessione al database <code>arduino_data</code>.</li>
+                <li>Definisce le coordinate per la località di cui ottenere i dati meteo.</li>
+                <li>Costruisce l'URL per l'API di OpenMeteo con i parametri necessari.</li>
+                <li>Invia una richiesta GET all'API di OpenMeteo per ottenere i dati meteo correnti.</li>
+                <li>Decodifica la risposta JSON dell'API.</li>
+                <li>Estrae i dati rilevanti (timestamp, temperatura, umidità, ecc.).</li>
+                <li>Inserisce i dati estratti nella tabella <code>weather_api_data</code> del database.</li>
+                <li>Gestisce eventuali errori di connessione al database o di richiesta all'API.</li>
+            </ul>
+
+            <h3>Script per il Recupero Dati in Caso di Inattività: genapi.php</h3>
+            <p>
+                Il file <code>genapi.php</code> viene utilizzato per recuperare i dati meteo nel caso in cui il sistema dovesse perdere la connessione o l'alimentazione.  Questo script popola il database con dati simulati per il periodo in cui il sistema è stato inattivo, assicurando che ci sia sempre una cronologia di dati disponibile.
+            </p>
+            <div class="codice-php">
+                 <h3>Codice PHP (genapi.php)</h3>
+                <pre><code>
+&lt;?php
+// Imposta il fuso orario italiano
+date_default_timezone_set('Europe/Rome');
+
+// Connessione al database
+$host = 'localhost';
+$db   = 'arduino_data';
+$user = 'root';         // <-- INSERISCI QUI IL TUO UTENTE DB -->
+$pass = '***';          // <-- INSERISCI QUI LA TUA PASSWORD DB -->
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (\PDOException $e) {
+    die("Errore di connessione: " . $e->getMessage());
+}
+
+// Ottiene il timestamp più recente presente nel DB
+$stmt = $pdo->query("SELECT MAX(timestamp) AS last_time FROM weather_api_data");
+$row = $stmt->fetch();
+$lastTimestamp = $row['last_time'] ?? null;
+
+// Se non esistono dati, parte da ieri a mezzanotte
+$start = $lastTimestamp ? strtotime($lastTimestamp) + 300 : strtotime('yesterday 00:00');
+$end = time(); // Ora attuale
+$interval = 5 * 60; // ogni 5 minuti
+
+for ($t = $start; $t <= $end; $t += $interval) {
+    $timestamp = date('Y-m-d H:i:s', $t);
+    $hour = (int)date('G', $t);
+
+    // Simula temperatura
+    $baseTemp = ($hour >= 6 && $hour <= 17) ? rand(17, 22) : rand(13, 16);
+    $temperature = round($baseTemp + rand(-10, 10) / 10, 1);
+
+    // Simula umidità
+    $humidity = round(rand(50, 80) + rand(-5, 5) / 10, 1);
+
+    // Giorno o notte
+    $is_day = ($hour >= 6 && $hour < 20) ? 1 : 0;
+
+    // Codice meteo
+    $weather_code = rand(0, 3);
+
+    // Pressione
+    $pressure = round(1005 + rand(-30, 30) / 10, 2);
+
+    // Vento
+    $wind_speed = round(8 + rand(0, 50) / 10, 2);
+
+    // Temperatura percepita
+    $apparent_temperature = round($temperature - rand(0, 15) / 10, 1);
+
+    // Inserimento nel database
+    $stmt = $pdo->prepare("INSERT INTO weather_api_data
+        (timestamp, temperature, humidity, is_day, weather_code, pressure, wind_speed, apparent_temperature)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+    $stmt->execute([
+        $timestamp,
+        $temperature,
+        $humidity,
+        $is_day,
+        $weather_code,
+        $pressure,
+        $wind_speed,
+        $apparent_temperature
+    ]);
+}
+
+echo "✅ Aggiornamento completato fino a " . date('Y-m-d H:i:s', $end);
+?>
+                </code></pre>
+            </div>
+            <p>
+                <b>Funzionalità:</b>
+            </p>
+            <ul>
+                <li>Imposta il fuso orario su "Europe/Rome".</li>
+                <li>Stabilisce una connessione al database <code>arduino_data</code>.</li>
+                <li>Determina l'ultimo timestamp disponibile nella tabella <code>weather_api_data</code>.</li>
+                <li>Calcola l'intervallo di tempo da recuperare (dall'ultimo timestamp o da ieri a mezzanotte fino all'ora attuale).</li>
+                <li>Genera dati meteorologici simulati per ogni intervallo di 5 minuti. I dati simulati includono:
+                    <ul>
+                        <li>Timestamp</li>
+                        <li>Temperatura (con variazione diurna)</li>
+                        <li>Umidità</li>
+                        <li>Indicatore giorno/notte</li>
+                        <li>Codice meteo casuale</li>
+                        <li>Pressione atmosferica</li>
+                        <li>Velocità del vento</li>
+                        <li>Temperatura percepita</li>
+                    </ul>
+                </li>
+                <li>Inserisce i dati simulati nella tabella <code>weather_api_data</code>.</li>
+                <li>Fornisce un messaggio di conferma al termine dell'inserimento.</li>
+            </ul>
+
+            <h3>Crontab Configuration</h3>
+            <p>
+                Per automatizzare l'esecuzione degli script <code>meteo_to_db.php</code> e <code>genapi.php</code>, è stato configurato il crontab del sistema.  Il crontab è un file che contiene una lista di comandi da eseguire a intervalli regolari.
+            </p>
+            <pre><code>
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+#
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+#
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+# m h  dom mon dow    command
+#*/15 * * * * /usr/bin/php /var/www/html/meteo_to_db.php
+*/5 * * * * /usr/bin/php /var/www/html/meteo_to_db.php >> /tmp/cron.log 2>&1
+#*/5 * * * * /usr/bin/php /var/www/html/genapi.php >> /tmp/cron.log 2>&1
+@reboot /usr/bin/php /var/www/html/genapi.php >> /tmp/cron.log 2>&1
+            </code></pre>
+            <p>
+                <b>Spiegazione delle righe di crontab:</b>
+            </p>
+            <ul>
+                <li><code>*/5 * * * * /usr/bin/php /var/www/html/meteo_to_db.php >> /tmp/cron.log 2>&1</code>: Questo comando esegue lo script <code>meteo_to_db.php</code> ogni 5 minuti. L'output dello script (sia l'output standard che gli errori) viene reindirizzato al file <code>/tmp/cron.log</code>.</li>
+                <li><code>#*/5 * * * * /usr/bin/php /var/www/html/genapi.php >> /tmp/cron.log 2>&1</code>: Questo comando è commentato (il carattere <code>#</code> all'inizio della riga lo disabilita). Se decommentato, eseguirebbe lo script <code>genapi.php</code> ogni 5 minuti, reindirizzando l'output al file <code>/tmp/cron.log</code>.</li>
+                 <li><code>@reboot /usr/bin/php /var/www/html/genapi.php >> /tmp/cron.log 2>&1</code>: Questo comando esegue lo script <code>genapi.php</code> all'avvio del sistema. L'output viene reindirizzato al file <code>/tmp/cron.log</code>. Questo assicura che, in caso di riavvio del sistema, vengano recuperati i dati meteo mancanti.</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Cyber Reflection Project | Documentazione</p>
+    </footer>
+</body>
+</html>
