@@ -18,6 +18,8 @@ Indice dei File:
 
 - gdpr.html: Dichiarazione di conformità al GDPR per il progetto.
 
+- Presentazione: https://www.canva.com/design/DAGnKRPQmiQ/p_RFZC_b18iPctxNR8zbEA/edit
+
 Descrizione dei File
 File HTML:
 
