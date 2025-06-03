@@ -20,11 +20,11 @@ Indice dei File:
 
 - chart3.php: Script PHP per la visualizzazione dei grafici di confronto per le informazioni atmosferiche.
 
-- generation3.php: Script PHP per la raccolta e l'invio dei dati atmosferici ottenuti dalla centralina.
+- generation3.php: Script PHP per l'invio dei dati atmosferici ottenuti dalla centralina.
 
 - meteo_to_db.php: Script PHP per la raccolta e l'invio dei dati atmosferici provenienti da Open Meteo.
 
-- 
+- weather_api_data.cpp: Script C++ per la raccolta dei dati atmosferici dalla centralina
  
 - Presentazione: https://www.canva.com/design/DAGnKRPQmiQ/p_RFZC_b18iPctxNR8zbEA/edit
 
